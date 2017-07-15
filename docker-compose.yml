@@ -1,0 +1,48 @@
+version: "2"
+
+services:
+  hadoop-master:
+    image: hdpv4:latest
+    hostname : hadoop-master
+    container_name: hadoop-master
+    networks:
+      - hadoop
+    ports:
+    - "8088:8088"
+    - "50070:50070"
+  hadoop-slave1:
+    image: hdpv4:latest
+    hostname: hadoop-slave1
+    container_name: hadoop-slave1
+    networks:
+      - hadoop
+  hadoop-slave2:
+    image: hdpv4:latest
+    hostname: hadoop-slave2
+    container_name: hadoop-slave2
+    networks:
+      - hadoop
+  spark-master:
+    image: spkv1:latest
+    hostname: spark-master
+    container_name: spark-master
+    networks:
+      - hadoop
+    ports:
+    - "8080:8080"
+    - "7077:7077"
+  spark-slave1:
+    image: spkv1:latest
+    hostname: spark-slave1
+    container_name: spark-slave1
+    networks:
+      - hadoop
+  spark-slave2:
+    image: spkv1:latest
+    hostname: spark-slave2
+    container_name: spark-slave2
+    networks:
+      - hadoop
+
+networks:
+  hadoop:
